@@ -6,7 +6,7 @@ before_install:
   - docker build -t martinshell/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  -  - docker run -e CI=true martinshell/react-test npm test
+  - - docker run -e CI=true martinshell/react-test npm test
 
 after_success:
   - docker build -t martinshell/multi-client ./client
@@ -26,10 +26,9 @@ deploy:
   region: us-east-1
   app: multi-docker
   env: MultiDocker-env
-  bucket_name: 	elasticbeanstalk-us-east-1-300706864044
+  bucket_name: elasticbeanstalk-us-east-1-300706864044
   bucket_path: docker-multi
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
+  secret_access_key: $AWS_SECRET_KEY
